@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Random Dog Image</title>
+</head>
+
+<body style="background-color:#212121; color:white; font-family:Arial; text-align:center;">
+
+    <h2>Random Dog 🐶</h2>
+
+    <button id="btn">Get New Dog</button>
+
+    <br><br>
+
+    <img id="dogImg" src="" alt="Dog Image" width="300" style="border-radius:10px; display:none;">
+
+</body>
+
+<script>
+
+    const btn = document.getElementById('btn');
+    const img = document.getElementById('dogImg');
+
+    btn.addEventListener('click', function () {
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://dog.ceo/api/breeds/image/random');
+
+        xhr.onreadystatechange = function () {
+
+            if (xhr.readyState === 4 && xhr.status === 200) {
+
+                const data = JSON.parse(xhr.responseText);
+                img.src = data.message;
+                img.style.display = "block";
+            }
+        };
+
+        xhr.send();
+    });
+
+</script>
+</html>
